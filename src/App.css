@@ -1,0 +1,144 @@
+@import url('https://fonts.cdnfonts.com/css/amazon-ember');
+@import url('http://fonts.cdnfonts.com/css/granbrook');
+@import url('http://fonts.cdnfonts.com/css/lt-museum');
+@import url('http://fonts.cdnfonts.com/css/lobster-2');
+
+:root {
+  --radius : 8px;
+  --detail-bg : rgba(237, 232, 233, 0.85);
+  --wrapper-bg : #f0ede4;
+  --drawer-bg: #d9d7d0;
+  --app-bar-bg: #e6d5d5;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #d7dbcc; 
+}
+::-webkit-scrollbar-thumb {
+  background: #5a6159; 
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.wrapper{
+  background-color: var(--wrapper-bg);
+}
+
+.logo-text {
+  font-family: 'Lobster', sans-serif;
+  font-size: 1.9rem;
+  width: auto;
+  cursor: pointer;
+}
+
+.app-bar{
+  color:#261e2c;
+  background-color: var(--app-bar-bg);
+}
+
+.app-container{
+  padding: 5vh;
+  font-family: 'Amazon Ember';
+  background-color: #261e2c;
+  box-sizing: border-box;
+  color: rgb(207, 207, 184);
+  height: 100vh;
+}
+
+@media only screen and (max-width: 450px) {
+  .app-container{
+    padding: 2vh;
+  }
+}
+
+.title{
+  text-align:start;
+  font-family: 'LT Museum', sans-serif;
+  font-size: 1.5rem;
+  text-overflow:clip;
+}
+
+.title-sm{
+  text-align:start;
+  font-family: 'Granbrook', sans-serif;
+  font-size: 1rem;
+  text-overflow: clip;
+  word-wrap: break-word;
+}
+
+.subtitle{
+  margin:5px 0px;
+  text-align:justify;
+  font-family: 'Granbrook', sans-serif;
+  font-size: 0.8rem;
+  text-overflow: ellipsis;
+}
+
+.columnNewsCard{
+  width: 300px;
+  padding: 20px;
+  height: 200px;
+}
+
+.imageBox{
+  position: relative;
+  box-sizing: border-box;
+}
+
+.gradient{
+  position: absolute;
+  bottom: 0px !important;
+  color: white; padding: 35px 7px 5px 10px;
+  width: 100%;
+  background-image: linear-gradient(rgba(245, 246, 252, 0) 0%, rgba(10, 10, 10, 0.43) 20%, rgba(10, 10, 10, 0.93) 100%);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-end;
+  max-height: 95%;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.shadowEffect{
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.35), 0 8px 25px 0 rgba(0, 0, 0, 0.35);
+  border-radius: var(--radius) !important;
+}
+
+.blurred-bg {
+  background-color: var(--detail-bg);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-height: 90vh;
+  width: 50%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+}
+
+.grid-view {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-evenly;
+  padding:20px;
+  height:calc(100vh - 64px);
+}
+
+.sidebar-container{
+  background-color: var(--app-bar-bg);
+  min-width: 300px;
+  max-width: 450px;
+  height: 100%;
+}
