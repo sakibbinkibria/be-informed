@@ -28,22 +28,17 @@ function App() {
 
   const loader = new Loader();
   const gridRef = useRef();
+  var lastScrollTop = 0;
 
   useEffect(() => {
-    callApi();
     getHeadlines();
   }, []);
 
   useEffect(() => {
     if(currentCategory !== 'home' && currentCategory !== 'search'){
-      getCategorizedNews(currentCategory);
+      getCategorizedNews(currentCategory, null, null, setLoading);
     }
   }, [currentCategory]);
-
-  async function callApi(){
-    const res = await axios.get('/api');
-    console.log(res);
-  }
 
   async function getHeadlines() {
     setLoading(true);
@@ -53,16 +48,14 @@ function App() {
     setLoading(false);
   }
 
-  async function getCategorizedNews(category, page, scrolling) {
-    if(!scrolling)
-      setLoading(true);
+  async function getCategorizedNews(category, page, scrolling, setLoading) {
+    setLoading(true);
     if (articles[category]?.length === 0 || scrolling) {
       if(!page)
         page = pageCounts[category];
-      const newArticles = await loader.loadArticles(category, 20, page, null);
-      setArticles({ ...articles, [category]: newArticles })
+      const newArticles = await loader.loadArticles(category, 12, page, null);
+      setArticles({ ...articles, [category]: [...articles[category], ...newArticles] })
     }
-    if(!scrolling)
       setLoading(false);
   }
   
@@ -104,20 +97,25 @@ function App() {
   const onScroll = async () => {
     if (gridRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = gridRef.current;
-      if (scrollHeight - scrollTop - clientHeight < 100 && !loadingMore) {
-        setLoadingMore(true);
-        const currentCount = pageCounts[currentCategory];
-        if(currentCategory === 'search'){
-            setPageCounts({...pageCounts, search: currentCount+1});
-            await search(searchQuery)
-        } else if(currentCategory === 'country'){
-            setPageCounts({...pageCounts, country: currentCount+1});
-            await filterByCountry(selectedCountry);
-        } else {
-          await getCategorizedNews(currentCategory === 'home' ? 'sports' : currentCategory, currentCount+1, true);
+      if(scrollTop > lastScrollTop){
+        //only call while scrolling down
+        if (scrollHeight - scrollTop - clientHeight < 250 && !loadingMore) {
+          //setLoadingMore(true);
+          const currentCount = pageCounts[currentCategory === 'home' ? 'sports' : currentCategory];
+          if(currentCategory === 'search'){
+              setPageCounts({...pageCounts, search: currentCount+1});
+              await search(searchQuery)
+          } else if(currentCategory === 'country'){
+              setPageCounts({...pageCounts, country: currentCount+1});
+              await filterByCountry(selectedCountry);
+          } else {
+            setPageCounts({...pageCounts, [currentCategory === 'home' ? 'sports' : currentCategory]: currentCount+1});
+            await getCategorizedNews(currentCategory === 'home' ? 'sports' : currentCategory, currentCount+1, true, setLoadingMore);
+          }
+          //setLoadingMore(false);
         }
-        setLoadingMore(false);
       }
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     }
   };
 
@@ -136,17 +134,15 @@ function App() {
           loading ?
             <CircularProgress style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', border: "0px" }} />
             :
-            <div ref={gridRef} onScroll={onScroll} style={{overflowY:"auto"}}>
+            <div ref={gridRef} onScroll={onScroll} style={{height: "calc(100vh - 64px)", overflowY:"auto"}}>
               {
                 currentCategory === 'home' ?
                   <MainComponent allArticles={articles} handleArticleCLick={handleArticleCLick} getCategorizedNews={getCategorizedNews}/>
                 : currentCategory === 'search' || currentCategory === 'country' ?
                     <GridComponent articles={searchResults} handleArticleCLick={handleArticleCLick} />
                   :
-                    articles.general.length > 0 ?
-                      <div style={{ height: "calc(100vh - 64px)",  overflowY : "auto" }}>
-                        <GridComponent articles={articles[currentCategory]} handleArticleCLick={handleArticleCLick} />
-                      </div>
+                    articles.sports.length > 0 ?
+                      <GridComponent articles={articles[currentCategory]} handleArticleCLick={handleArticleCLick} />
                     : ''
               }
               {

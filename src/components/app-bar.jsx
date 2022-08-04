@@ -36,7 +36,7 @@ export default function AppBarComponent({setCurrentCategory, search, filterByCou
         <div style={{margin:"0px 10px", display:"flex", flexGrow:1}}>
           <TextField
             value = {searchQuery}
-            style={{width:"30vw", alignSelf:"center", background:"#f0e6e8", position:"absolute", top:"9px", left:"50%", transform:"translate(-50%, 0)" }}
+            style={{height: "46px",width:"30vw", alignSelf:"center", background:"#f0e6e8", position:"absolute", top:"9px", left:"50%", transform:"translate(-50%, 0)" }}
             onChange={(e)=>{setSearchQuery(e.target.value)}}
             onKeyDown={handleKeypress}
             label="Search"

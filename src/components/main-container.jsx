@@ -18,7 +18,7 @@ export default function MainComponent({ allArticles, handleArticleCLick, getCate
 
     const handleTabChange = (e, value)=>{
         const currentCategory = config.categories[value].toLowerCase();
-        getCategorizedNews(currentCategory)
+        getCategorizedNews(currentCategory, null, null, setLoading)
         setTabIndex(value);
     }
 
@@ -40,8 +40,8 @@ export default function MainComponent({ allArticles, handleArticleCLick, getCate
                 <ThumbnailComponent handleArticleCLick={handleArticleCLick} article={loadedArticles['headlines'][0]} width={"50vw"} height={"100%"} titleClass={"title"} />
 
                 <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "calc(50% - 10px)", height: "100%", boxSizing: "border-box" }}>
-                    <ThumbnailComponent handleArticleCLick={handleArticleCLick} article={loadedArticles.headlines[1]} width={"100%"} height={"calc(57% - 10px)"} titleClass={"title"} />
-                    <div style={{ display: "flex", width: "100%", gap: "10px", boxSizing: "border-box", height: "43%", justifyContent: "space-between" }}>
+                    <ThumbnailComponent handleArticleCLick={handleArticleCLick} article={loadedArticles.headlines[1]} width={"100%"} height={"calc(62% - 10px)"} titleClass={"title"} />
+                    <div style={{ display: "flex", width: "100%", gap: "10px", boxSizing: "border-box", height: "38%", justifyContent: "space-between" }}>
                         <ThumbnailComponent handleArticleCLick={handleArticleCLick} article={loadedArticles.headlines[2]} width={"calc(50% - 5px)"} height={"100%"} titleClass={"title-sm"} />
                         <ThumbnailComponent handleArticleCLick={handleArticleCLick} article={loadedArticles.headlines[3]} width={"calc(50% - 5px)"} height={"100%"} titleClass={"title-sm"} />
                     </div>

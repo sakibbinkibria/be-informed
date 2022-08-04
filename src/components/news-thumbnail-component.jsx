@@ -5,9 +5,9 @@ export default function ThumbnailComponent({ article, width, height, titleClass,
         <div className="shadowEffect" style={{ height: height, width: width }}>
             <div className="imageBox" style={{ width: "100%", height: "100%" }} onClick={() => { handleArticleCLick(article) }}>
                 {
-                    article.urlToImage ?
+                    !article.urlToImage ?
                         <ImageNotSupportedIcon style={{ width: "100%", height: "100%" }} />
-                        : <img src={article.urlToImage } alt="not vailable" style={{ objectFit: "cover", width: "100%", height: "100%", borderRadius: "8px" }} />
+                        : <img src={article.urlToImage } alt="not available" style={{ objectFit: "cover", width: "100%", height: "100%", borderRadius: "8px" }} />
                 }
                 
                 <div className='gradient' style={{ wordBreak: "break-word" }}>
@@ -15,7 +15,7 @@ export default function ThumbnailComponent({ article, width, height, titleClass,
                         {article.title}
                     </div>
                     <div className="subtitle">
-                        {article.author}, {article.source.name}
+                        {article.author ? article.author+', ' : ''}{article.source.name}
                     </div>
                 </div>
             </div>

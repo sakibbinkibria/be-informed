@@ -75,7 +75,7 @@ export default function SideBarComponent({ sidebarOpen, toggleSideBar, setCurren
                             <FlagIcon />
                         </ListItemIcon>
                         <ListItemText primary="Countries" />
-                        {catgoryOpen ? <ExpandLess /> : <ExpandMore />}
+                        {countryOpen ? <ExpandLess /> : <ExpandMore />}
                     </ListItemButton>
                     <Collapse in={countryOpen} timeout="auto" unmountOnExit>
                         <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
