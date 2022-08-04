@@ -61,8 +61,8 @@ export default function MainComponent({ allArticles, handleArticleCLick, getCate
             {/* Tabs */}
             <Tabs value={tabIndex} onChange={handleTabChange} style={{ marginTop: "10px"}} variant="scrollable" scrollButtons="auto">
                 {
-                    config.categories.map((category) => {
-                        return <Tab label={category}/>
+                    config.categories.map((category, index) => {
+                        return <Tab key={index} label={category}/>
                     })
                 }
             </Tabs>

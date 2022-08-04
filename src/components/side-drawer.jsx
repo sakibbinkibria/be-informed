@@ -47,7 +47,7 @@ export default function SideBarComponent({ sidebarOpen, toggleSideBar, setCurren
                         <div className="logo-text" style={{ background: "#e6d5d5", padding: "5px", margin: "0px auto", width: "100%", boxSizing: "border-box", textAlign: "center" }}> Be Informed </div>
                     }
                 >
-                    
+
                     <ListItemButton onClick={() => { setCategoryOpen(!catgoryOpen) }}>
                         <ListItemIcon>
                             <CategoryIcon />
@@ -58,11 +58,12 @@ export default function SideBarComponent({ sidebarOpen, toggleSideBar, setCurren
                     <Collapse in={catgoryOpen} timeout="auto" unmountOnExit>
                         <List disablePadding>
                             {
-                                config.categories.map((category) => {
+                                config.categories.map((category, index) => {
                                     return (
                                         <ListItemButton
                                             sx={{ pl: 8 }}
                                             onClick={() => { setCurrentCategory(category.toLowerCase()) }}
+                                            key={index}
                                         >
                                             <ListItemText primary={category} />
                                         </ListItemButton>
