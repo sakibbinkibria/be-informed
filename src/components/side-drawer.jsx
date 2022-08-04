@@ -47,6 +47,7 @@ export default function SideBarComponent({ sidebarOpen, toggleSideBar, setCurren
                         <div className="logo-text" style={{ background: "#e6d5d5", padding: "5px", margin: "0px auto", width: "100%", boxSizing: "border-box", textAlign: "center" }}> Be Informed </div>
                     }
                 >
+                    
                     <ListItemButton onClick={() => { setCategoryOpen(!catgoryOpen) }}>
                         <ListItemIcon>
                             <CategoryIcon />

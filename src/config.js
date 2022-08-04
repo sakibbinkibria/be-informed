@@ -5,7 +5,8 @@ const config = {
     ],
     countryCodes: [
         'us', 'cn', 'uk', 'au', 'de'
-    ]
+    ],
+    isMobileDevice: true,
 }
 
 export default config;

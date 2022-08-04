@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Modal,Typography } from '@mui/material';
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
+import config from '../config';
 
 export default function NewsDetail({open, handleModalClose, news}) {
     const [dateString, setDateString] = useState('');
@@ -26,7 +27,7 @@ export default function NewsDetail({open, handleModalClose, news}) {
             disableAutoFocus={true}
         >
             <div className="blurred-bg">
-                <Typography style={{fontFamily:"LT Museum", fontSize:"1.7rem"}}>{news.title}</Typography>
+                <Typography style={{fontFamily:"LT Museum", fontSize:config.isMobileDevice ? "1.7rem" : "1.2rem"}}>{news.title}</Typography>
                 <div style={{display:"flex", fontStyle:"italic"}}>
                     {
                         news.author &&
@@ -37,7 +38,7 @@ export default function NewsDetail({open, handleModalClose, news}) {
                 {
                     error ?
                         <ImageNotSupportedIcon style={{width:"30vw", height:"20vw", margin:"15px auto"}}/>
-                    : <img style={{width:"39vw", height:"26vw", objectFit:"cover", margin:"15px auto"}} className="shadowEffect" src = {news.urlToImage} alt="missing" onerror={handleError}/>
+                    : <img style={{width: config.isMobileDevice ? "90%" : "80%", height:"auto", objectFit:"cover", margin:"15px auto"}} className="shadowEffect" src = {news.urlToImage} alt="missing" onerror={handleError}/>
                 }
                 <Typography variant="body1"> {news.description}  <a href={news.url} target="_blank">read more</a></Typography>
             </div>

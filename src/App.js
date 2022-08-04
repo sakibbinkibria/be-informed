@@ -31,6 +31,9 @@ function App() {
   var lastScrollTop = 0;
 
   useEffect(() => {
+    if(window.innerWidth >= 700){
+      config.isMobileDevice = false;
+    }
     getHeadlines();
   }, []);
 
