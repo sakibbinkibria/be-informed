@@ -21,11 +21,11 @@
   "scripts": {
     "start": "react-scripts start",
     "start-server": "node server/api-server.js",
-    "build": "react-scripts build",
+    "build": "react-scripts build && npm run start-server",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://main--be-informed.netlify.app/:3001",
+  "proxy": "http://localhost:3001",
   "eslintConfig": {
     "extends": [
       "react-app",
